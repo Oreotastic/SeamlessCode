@@ -25,3 +25,22 @@ const sync = async() => {
 }
 
 
+//Selects all users from database
+const getUsers = async() => {
+  const sql = `SELECT * FROM users`
+  const response = await client.query(sql)
+  return response.rows
+}
+
+//Grabs user from database by ID
+const getUser = async(id) => {
+  const sql = `SELECT * FROM users WHERE id = $1`
+  const response = await client.query(sql, [id])
+  return response.rows[0]
+}
+
+module.exports = {
+  sync,
+  getUsers,
+  getUser
+}
